@@ -4,7 +4,7 @@
   "description": "simple application of user system which perform all user operation",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "mocha"
   },
   "repository": {
     "type": "git",
@@ -28,5 +28,10 @@
     "mysql2": "^2.2.5",
     "nodemailer": "^6.5.0",
     "sequelize": "^6.6.2"
+  },
+  "devDependencies": {
+    "chai": "^4.3.4",
+    "chai-http": "^4.3.0",
+    "mocha": "^8.3.2"
   }
 }

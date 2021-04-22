@@ -15,7 +15,7 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING
         },
         isVerified: {
-            type: Sequelize.Boolean,
+            type: Sequelize.STRING,
             default: false
         },
         resetPasswordToken: {
@@ -23,20 +23,20 @@ module.exports = (sequelize, Sequelize) => {
             required: false
         },
         resetPasswordExpires: {
-            type: Sequelize.Date,
+            type: Sequelize.DATE,
             required: false
         },
     }, {
         freezeTableName: true,
         instanceMethods: {
-            setPassword = function (password) {
+            setPassword: function (password) {
                 this.salt = crypto.randomBytes(16).toString('hex');
                 console.log(password);
                 this.hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
                 console.log(this.hash);
             },
 
-            validPassword = function (password) {
+            validPassword: function (password) {
                 var hash = crypto.pbkdf2Sync(password, this.salt, 1000, 64, 'sha512').toString('hex');
                 return this.hash === hash;
             }
