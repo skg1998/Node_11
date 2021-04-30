@@ -1,0 +1,25 @@
+{
+  "name": "node-docker",
+  "version": "1.0.0",
+  "description": "node docker deployment ",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon src/index.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/skg1998/Node_11.git"
+  },
+  "author": "sahil gupta",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/skg1998/Node_11/issues"
+  },
+  "homepage": "https://github.com/skg1998/Node_11#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.7"
+  }
+}
