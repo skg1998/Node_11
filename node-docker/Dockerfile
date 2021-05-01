@@ -14,6 +14,7 @@ RUN npm install
 
 # Bundle app source
 COPY . ./
-EXPOSE 3000
+ENV PORT=3000
+EXPOSE ${PORT}
 CMD ["npm", "run", "dev"]
 # Run a container
