@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const dbConnect = require('./config/db');
 const PostRouter = require('./routes/postRoutes');
+const UserRouter = require('./routes/userRoutes');
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -20,6 +21,7 @@ app.get('/', (req, res) => {
 })
 
 app.use('/api/v1/posts', PostRouter);
+app.use('/api/v1/users', UserRouter);
 
 app.listen(port, () => {
     console.log(`App listening on port ${port}!`);
