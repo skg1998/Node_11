@@ -4,7 +4,7 @@ const bcrypt = require('bcryptjs');
 const signup = async (req, res, next) => {
     try {
         const { username, password } = req.body;
-        const hashpassword = bcrypt.hash(password, 12);
+        const hashpassword = await bcrypt.hash(password, 12);
         const data = {
             username: username,
             password: hashpassword
@@ -33,18 +33,20 @@ const login = async (req, res, next) => {
             })
         }
 
-        const comparePassword = await bcrypt.compare(password, user.password);
+        const comparePassword = await bcrypt.compare(password, user[0].password);
+
         if (comparePassword) {
             res.status(201).json({
-                status: "succes"
+                status: "succes",
+                message: "user login succesfull"
             })
         } else {
             res.status(404).json({
                 status: "fail",
+                message: "incorrect username or password"
             })
         }
     } catch (e) {
-        console.log(e);
         res.status(400).json({
             status: "fail"
         })
