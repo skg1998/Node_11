@@ -10,6 +10,7 @@ const signup = async (req, res, next) => {
             password: hashpassword
         }
         const newUser = await User.create(data);
+        req.session.user = newUser;
         res.status(201).json({
             status: "succes",
             data: newUser
@@ -36,6 +37,7 @@ const login = async (req, res, next) => {
         const comparePassword = await bcrypt.compare(password, user[0].password);
 
         if (comparePassword) {
+            req.session.user = user;
             res.status(201).json({
                 status: "succes",
                 message: "user login succesfull"
@@ -47,6 +49,7 @@ const login = async (req, res, next) => {
             })
         }
     } catch (e) {
+        console.log(e);
         res.status(400).json({
             status: "fail"
         })
