@@ -1,5 +1,6 @@
 const express = require('express');
 const bodyParser = require('body-parser');
+const cors = require('cors');
 const dbConnect = require('./config/db');
 const redis = require('redis');
 const session = require('express-session');
@@ -26,6 +27,8 @@ app.use(bodyParser.urlencoded({ extended: false }))
 
 // parse application/json
 app.use(express.json())
+app.enable('trust proxy');
+app.use(cors({}));
 app.use(session({
     store: new RedisStore({
         client: redisClient
