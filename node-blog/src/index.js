@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const color = require('colors');
 const connectDB = require('./config/db');
+const errorHandler = require('./middleware/error');
 
 //connect Database
 connectDB();
@@ -34,6 +35,9 @@ if (process.env.NODE_ENV === 'development') {
 
 //Mount Routes
 app.use('/api/v1/bootcamps', bootcamps)
+
+//error handler
+app.use(errorHandler);
 
 app.listen(PORT, () => {
     console.log(`server is listen in ${process.env.NODE_ENV} on ${PORT} `.yellow.bold);
