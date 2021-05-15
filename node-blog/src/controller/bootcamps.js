@@ -1,4 +1,4 @@
-const BootCamp = require('../modal/bootCamp');
+const BootCamp = require('../model/bootCamp');
 const ErrorResponse = require('../util/errorResponse');
 
 /**
