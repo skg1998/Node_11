@@ -5,13 +5,14 @@ const color = require('colors');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
 
-//connect Database
-connectDB();
-
 //Router files
 const bootcamps = require('./routes/bootcamps');
+const courses = require('./routes/courses');
 
 const app = express();
+
+//connect Database
+connectDB();
 
 //express json
 app.use(express.json())
@@ -32,6 +33,7 @@ if (process.env.NODE_ENV === 'development') {
 
 //Mount Routes
 app.use('/api/v1/bootcamps', bootcamps)
+app.use('/api/v1/courses', courses)
 
 //error handler
 app.use(errorHandler);
