@@ -1,7 +1,9 @@
 require('dotenv').config({ debug: true })
+const path = require('path');
 const express = require('express');
 const morgan = require('morgan');
 const color = require('colors');
+const fileUpload = require('express-fileupload');
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
 
@@ -16,6 +18,12 @@ connectDB();
 
 //express json
 app.use(express.json())
+
+//File Upload
+app.use(fileUpload());
+
+//set static folder
+app.use(express.static(path.join(__dirname, 'public')))
 
 const PORT = process.env.PORT || 5000
 
