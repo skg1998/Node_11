@@ -10,23 +10,18 @@ const ErrorResponse = require('../util/errorResponse');
  */
 exports.getCourse = async (req, res, next) => {
     try {
-        let query;
         if (req.params.bootcampId) {
-            query = Course.find({ bootcamp: req.params.bootcampId })
+            const courses = await Course.find({ bootcamp: req.params.bootcampId })
+            return res.status(201).json({
+                succes: true,
+                count: courses.length,
+                data: courses,
+                message: `get all data succesfully!`
+            })
         } else {
-            query = Course.find().populate({
-                path: 'bootcamp',
-                select: 'name description'
-            });
+            res.status(200).json(res.advancedResult)
         }
 
-        const courses = await query;
-        res.status(201).json({
-            status: false,
-            count: courses.length,
-            data: courses,
-            message: "All courses get succesfully !"
-        })
     } catch (err) {
         res.status(400).json({
             status: false,
