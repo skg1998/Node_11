@@ -4,6 +4,8 @@ const express = require('express');
 const morgan = require('morgan');
 const color = require('colors');
 const fileUpload = require('express-fileupload');
+var cookieParser = require('cookie-parser')
+
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
 
@@ -22,6 +24,9 @@ app.use(express.json())
 
 //File Upload
 app.use(fileUpload());
+
+//cookie
+app.use(cookieParser())
 
 //set static folder
 app.use(express.static(path.join(__dirname, 'public')))
