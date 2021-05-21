@@ -24,7 +24,7 @@ exports.register = async (req, res, next) => {
  * 
  * @desc login into account
  * @route POST api/v1/auth/login
- * @param Private
+ * @param Public
  */
 exports.login = async (req, res, next) => {
     try {
@@ -35,16 +35,17 @@ exports.login = async (req, res, next) => {
             return next(new ErrorResponse('Please Provide an email and password', 400))
         }
 
-        //CHECK USER
-        const user = await User.find({ email: email }).select('+password')
+        // Check for user
+        const user = await User.findOne({ email: email }).select('+password');
         if (!user) {
-            return next(new ErrorResponse('Invalid credentials', 401))
+            return next(new ErrorResponse('Invalid credentials User not found', 401));
         }
 
-        //Check hashed Password
-        const isMatched = await user.matchedPassword(password);
-        if (!isMatched) {
-            return next(new ErrorResponse('Invalid credentials', 401))
+        // Check if password matches
+        const isMatch = await user.matchPassword(password);
+
+        if (!isMatch) {
+            return next(new ErrorResponse('Invalid credentials', 401));
         }
 
         sendTokenResponse(user, 200, res, "login  successfully !");
@@ -73,7 +74,20 @@ const sendTokenResponse = (user, statusCode, res, message) => {
         .json({
             success: true,
             token: token,
-            data: user,
             message: message
         })
+}
+
+/**
+ * 
+ * @desc get account
+ * @route POST api/v1/auth/login
+ * @param Private
+ */
+exports.getMe = async (req, res, next) => {
+    const user = await User.findById(req.user.id);
+    res.status(200).json({
+        success: true,
+        data: user
+    })
 }
