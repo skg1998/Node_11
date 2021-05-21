@@ -85,9 +85,41 @@ const sendTokenResponse = (user, statusCode, res, message) => {
  * @param Private
  */
 exports.getMe = async (req, res, next) => {
-    const user = await User.findById(req.user.id);
-    res.status(200).json({
-        success: true,
-        data: user
-    })
+    try {
+        const user = await User.findById(req.user.id);
+        res.status(200).json({
+            success: true,
+            data: user
+        })
+    } catch (err) {
+        next(err);
+    }
+}
+
+/**
+ * 
+ * @desc forgot password
+ * @route POST api/v1/auth/forgotPassword
+ * @param Public
+ */
+exports.forgotPassword = async (req, res, next) => {
+    try {
+        const user = await User.findOne({ email: req.body.email });
+
+        if (!user) {
+            return next(new ErrorResponse('User not found', 401));
+        }
+
+        //Get Reset token
+        const resetToken = user.getResetPasswordToken();
+
+        await user.save({ validateBeforeSave: false })
+
+        res.status(200).json({
+            success: true,
+            data: user
+        })
+    } catch (err) {
+        next(err);
+    }
 }
