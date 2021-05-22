@@ -5,6 +5,12 @@ const morgan = require('morgan');
 const color = require('colors');
 const fileUpload = require('express-fileupload');
 var cookieParser = require('cookie-parser')
+const mongoSanitize = require('express-mongo-sanitize');
+const helmet = require("helmet");
+const xss = require('xss-clean');
+const hpp = require('hpp');
+const rateLimit = require('express-rate-limit')
+const cors = require('cors')
 
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
@@ -12,7 +18,9 @@ const errorHandler = require('./middleware/error');
 //Router files
 const bootcamps = require('./routes/bootcamps');
 const courses = require('./routes/courses');
-const Auth = require('./routes/auth')
+const Auth = require('./routes/auth');
+const User = require('./routes/users');
+const Review = require('./routes/Reviews');
 
 const app = express();
 
@@ -27,6 +35,28 @@ app.use(fileUpload());
 
 //cookie
 app.use(cookieParser())
+
+// To remove data,  or Sanitize data
+app.use(mongoSanitize());
+
+//Set Security header
+app.use(helmet());
+
+//Set xss
+app.use(xss());
+
+//rate limit
+const limiter = rateLimit({
+    windowMs: 10 * 60 * 1000, //10 mins
+    max: 10
+})
+app.use(limiter);
+
+//Prevent http params Pollution
+app.use(hpp())
+
+//Enable cors
+app.use(cors())
 
 //set static folder
 app.use(express.static(path.join(__dirname, 'public')))
@@ -49,6 +79,8 @@ if (process.env.NODE_ENV === 'development') {
 app.use('/api/v1/bootcamps', bootcamps)
 app.use('/api/v1/courses', courses)
 app.use('/api/v1/auth', Auth);
+app.use('/api/v1/users', User)
+app.use('api/v1/reviews', Review)
 
 //error handler
 app.use(errorHandler);
