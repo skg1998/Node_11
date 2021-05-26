@@ -27,4 +27,19 @@ npm run dev
  http://localhost:5000/
 ```
 
-## Version: 1.0.0
+# Project Specification
+
+> To complete Specification visit the project
+
+## node-docker
+
+> Implement Docker with nodejs , In which create a simple commenting (post) system with authentication and authrization
+
+## node-blog
+
+> This is a bootcamp create project, in which we can create a bootcamp, add course, add a comment, complete authentication and authrization and more.
+
+## UserSystem
+
+> Node-mysql project , make a complete user system in which a user can register, login,
+> update profile photo, delete profile, forget password, reset password, hashing password , session manegment complete authenication and authrization
