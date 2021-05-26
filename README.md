@@ -35,11 +35,17 @@ npm run dev
 
 > Implement Docker with nodejs , In which create a simple commenting (post) system with authentication and authrization
 
+- specification: Docker and redis
+
 ## node-blog
 
 > This is a bootcamp create project, in which we can create a bootcamp, add course, add a comment, complete authentication and authrization and more.
+
+- specification: Advanced Mangoose query
 
 ## UserSystem
 
 > Node-mysql project , make a complete user system in which a user can register, login,
 > update profile photo, delete profile, forget password, reset password, hashing password , session manegment complete authenication and authrization
+
+- specification: Node Mysql(sequilize)
