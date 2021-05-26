@@ -33,7 +33,7 @@ npm run dev
 
 ## node-docker
 
-> Implement Docker with nodejs , In which create a simple commenting (post) system with authentication and authrization
+> Implement Docker with nodejs , In which create a simple commenting (post) system with complete authentication and authrization and memory manegment with redis
 
 - specification: Docker and redis
 
