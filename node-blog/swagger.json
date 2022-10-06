@@ -1,0 +1,32 @@
+{
+  "swaggerDefinition": {
+    "openapi": "3.0.1",
+    "info": {
+      "title": "My Dev Bootcamp API",
+      "description": "Api for Bootcamp Project",
+      "version": "1.0.0"
+    },
+    "servers": [
+      {
+        "url": "http://localhost:5000/api/v1",
+        "description": "Local Server"
+      },
+      {
+        "url": "https://devbootcamp-api.herokuapp.com/",
+        "description": "Production Server"
+      }
+    ],
+    "components": {
+      "securitySchemes": {
+        "bearerAuth": {
+          "type": "apiKey",
+          "name": "Authorization",
+          "scheme": "bearer",
+          "in": "header",
+          "bearerFormat": "JWT"
+        }
+      }
+    }
+  },
+  "apis": ["./src/routes/*.js"]
+}

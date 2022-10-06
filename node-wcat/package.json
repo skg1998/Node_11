@@ -1,0 +1,9 @@
+{
+  "name": "wcat",
+  "version": "1.0.0",
+  "description": "create a cli with some of cat linux features",
+  "main": "index.js",
+  "scripts": {},
+  "author": "sahil gupta",
+  "license": "ISC"
+}

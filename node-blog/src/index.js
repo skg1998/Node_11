@@ -15,6 +15,12 @@ const cors = require('cors')
 const connectDB = require('./config/db');
 const errorHandler = require('./middleware/error');
 
+//Swagger
+const swaggerJsDoc = require('swagger-jsdoc');
+const swaggerUi = require('swagger-ui-express');
+const SwaggerOptions = require('../swagger.json');
+const swaggerDocument = swaggerJsDoc(SwaggerOptions);
+
 //Router files
 const bootcamps = require('./routes/bootcamps');
 const courses = require('./routes/courses');
@@ -81,6 +87,7 @@ app.use('/api/v1/courses', courses)
 app.use('/api/v1/auth', Auth);
 app.use('/api/v1/users', User)
 app.use('api/v1/reviews', Review)
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 
 //error handler
 app.use(errorHandler);
